@@ -1,7 +1,7 @@
 {% from "powerdns/map.jinja" import powerdns with context %}
 
-include:
-  - powerdns
+#include:
+#  - powerdns
 
 powerdns_config:
   file.managed:

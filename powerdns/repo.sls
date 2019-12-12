@@ -9,5 +9,12 @@ powerdns_server_repo:
     - keyid: {{ powerdns.repo.keyid }}
     - keyserver: keys.gnupg.net
     {% elif salt['grains.get']('os_family') == 'RedHat' %}
-    {# TODO: add RHEL/CentOS support #}
+    - name: powerdns-auth-42
+    - humanname: PowerDNS repository for PowerDNS Authoritative Server - version 4.2.X
+    - baseurl: http://repo.powerdns.com/{{ salt['grains.get']('os').lower() }}/$basearch/$releasever/auth-42
+    #- baseurl: http://repo.powerdns.com/{{ salt['grains.get']('os').lower() }}/{{ salt['grains.get']('osarch') }}/{{ salt['grains.get']('osmajorrelease') }}/auth-42
+    - gpgkey: https://repo.powerdns.com/FD380FBB-pub.asc
+    - gpgcheck: 1
+    - priority: 90
+    - includepkg: pdns*
     {% endif %}
