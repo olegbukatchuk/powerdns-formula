@@ -16,22 +16,17 @@ Available states
 `powerdns`
 ----------
 
-Installs PowerDNS authorative server.
+Installs PowerDNS authorative server from official repo, applies configuration.
 
 `powerdns.repo`
 ---------------
 
-Installs PowerDNS authorative server from official repostiory.
+Installs PowerDNS official repostiory.
 
-`powerdns.backend-mysql`
+`powerdns.install`
 ------------------------
 
-Installs PowerDNS MySQL backend package.
-
-`powerdns.backend-sqlite3`
---------------------------
-
-Installs PowerDNS sqlite3 backend package. Initializes sqlite3 db specified in config pillar.
+Installs PowerDNS authoritative server, database backend of choice, initializes db backend.
 
 `powerdns.config`
 -----------------
