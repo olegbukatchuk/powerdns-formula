@@ -2,6 +2,7 @@
     'lookup': salt['grains.filter_by']({
         'Debian': {
             'pkg': 'pdns-server',
+            'version': '4.2.1',
             'config_file': '/etc/powerdns/pdns.conf',
             'service': 'pdns',
             'backend_geoip_pkg': 'pdns-backend-geoip',
@@ -18,6 +19,7 @@
         },
         'RedHat': {
             'pkg': 'pdns',
+            'version': '4.2.1',
             'config_file': '/etc/pdns/pdns.conf',
             'service': 'pdns',
             'backend_geoip_pkg': 'pdns-backend-geoip',
@@ -30,10 +32,11 @@
             'backend_pgsql_pkg': 'pdns-backend-pgsql',
             'backend_pipe_pkg': 'pdns-backend-pipe',
             'backend_remote_pkg': 'pdns-backend-remote',
-            'backend_sqlite3_pkg': 'pdns-backend-sqlite3',
+            'backend_sqlite3_pkg': 'pdns-backend-sqlite',
         },
         'Suse': {
             'pkg': 'pdns',
+            'version': '4.2.1',
             'config_file': '/etc/pdns/pdns.conf',
             'service': 'pdns',
             'backend_geoip_pkg': 'pdns-backend-geoip',
@@ -65,7 +68,42 @@
         },
     }),
     'repo': {
-        'release': '40',
+        'release': '42',
         'keyid': '1B0C6205FD380FBB',
     },
 }, merge=True) %}
+
+{% set pdns_recursor = salt['pillar.get']('powerdns-recursor', {
+       'lookup': salt['grains.filter_by']({
+        'Debian': { 
+            'pkg': 'pdns-recursor',
+            'version': '4.3.0',
+            'config_file': '/etc/pdns-recursor/recursor.conf',
+            'service': 'pdns-recursor',
+         },
+        'RedHat': {
+            'pkg': 'pdns-recursor',
+            'version': '4.3.0',
+            'config_file': '/etc/pdns-recursor/recursor.conf',
+            'service': 'pdns-recursor',
+         },
+    }),
+    'config': salt['grains.filter_by']({
+        'Debian': {
+            'config-dir': '/etc/pdns-recursor',
+            'setgid': 'pdns',
+            'setuid': 'pdns',
+        },
+        'RedHat': {
+            'daemon': 'no',
+            'guardian': 'no',
+            'setgid': 'pdns',
+            'setuid': 'pdns',
+        },
+    }),
+    'repo': {
+        'release': '43',
+        'keyid': '1B0C6205FD380FBB',
+    },
+}, merge=True) %}
+

@@ -39,7 +39,8 @@ powerdns_mysql_initdb:
       - file: powerdns_mysql_init_db_script
 {% endif %}
 
-{% if 'gsqlite' in pillar.powerdns.config.launch %}
+
+{% if 'gsqlite3' in pillar.powerdns.config.launch %}
 powerdns_backend_sqlite3:
   pkg.installed:
     - name: {{ powerdns.lookup.backend_sqlite3_pkg }}
@@ -56,7 +57,7 @@ powerdns_backend_sqlite3:
 
 powerdns_init_db:
   cmd.run:
-    - name: sqlite3 {{ powerdns.config['gsqlite3-database'] }} < /usr/share/doc/pdns-backend-sqlite3/schema.sqlite3.sql
+    - name: sqlite3 {{ powerdns.config['gsqlite3-database'] }} < /usr/share/doc/pdns-backend-sqlite-{{ powerdns.lookup.version }}/schema.sqlite3.sql
     - creates: {{ powerdns.config['gsqlite3-database'] }}
     - require:
       - pkg: powerdns_backend_sqlite3
@@ -69,4 +70,5 @@ powerdns_init_db:
     - require:
       - cmd: powerdns_init_db
 {% endif %}
+
 
