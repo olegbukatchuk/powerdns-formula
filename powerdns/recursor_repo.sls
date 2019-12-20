@@ -18,4 +18,3 @@ powerdns_resolver_repo:
     - priority: 90
     - includepkg: pdns*
     {% endif %}
-~
