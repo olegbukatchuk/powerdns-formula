@@ -5,7 +5,7 @@ powerdns_recursor_config:
     - name: {{ pdns_recursor.lookup.config_file }}
     - source: salt://powerdns/files/recursor.conf
     - template: jinja
-    - user: root
+    - user: {{ pdns_recursor.config.setuid }}
     - group: root
     - mode: 600
     - require:
