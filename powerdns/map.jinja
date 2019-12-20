@@ -91,14 +91,13 @@
     'config': salt['grains.filter_by']({
         'Debian': {
             'config-dir': '/etc/pdns-recursor',
-            'setgid': 'pdns',
-            'setuid': 'pdns',
+            'setgid': 'pdns-recursor',
+            'setuid': 'pdns-recursor',
         },
         'RedHat': {
             'daemon': 'no',
-            'guardian': 'no',
-            'setgid': 'pdns',
-            'setuid': 'pdns',
+            'setgid': 'pdns-recursor',
+            'setuid': 'pdns-recursor',
         },
     }),
     'repo': {
