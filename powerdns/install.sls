@@ -73,7 +73,12 @@ powerdns_init_db:
 
 {% if 'bind' in pillar.powerdns.config.launch %}
 
-# prepare files
+#/var/lib/powerdns:
+{{ salt.file.dirname(powerdns.config['bind-config']) }}:
+  file.directory:
+    - user: pdns
+    - group: pdns
+
 bind_config:
   file.managed:
     - name: {{ powerdns.config['bind-config'] }}
@@ -81,5 +86,6 @@ bind_config:
     - group: pdns
     - mode: 640
     - contents_pillar: powerdns:bind_config:contents
+
 {% endif %}
 
