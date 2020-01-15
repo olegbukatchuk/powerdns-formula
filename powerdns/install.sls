@@ -71,4 +71,15 @@ powerdns_init_db:
       - cmd: powerdns_init_db
 {% endif %}
 
+{% if 'bind' in pillar.powerdns.config.launch %}
+
+# prepare files
+bind_config:
+  file.managed:
+    - name: {{ powerdns.config['bind-config'] }}
+    - user: pdns
+    - group: pdns
+    - mode: 640
+    - contents_pillar: powerdns:bind_config:contents
+{% endif %}
 
