@@ -1,7 +1,7 @@
 {% if pillar.powerdns is defined or pillar['powerdns-recursor'] is defined %}
 include:
 {% if pillar.powerdns is defined and pillar.powerdns.config is defined %}
- - powerdns.install
+ #- powerdns.install
  - powerdns.config
  - powerdns.service
 {% endif %}
